@@ -17,18 +17,21 @@ import 'listin_service_test.mocks.dart';
 void main() {
 
   group("getListins: ", () {
-    test("O método deve retornar uma lista de listin.", () {
-      MockFirebaseFirestore mockFirebaseFirestore = MockFirebaseFirestore();
+    late MockFirebaseFirestore mockFirebaseFirestore;
+    late String uid;
+    late MockCollectionReference<Map<String, dynamic>> mockCollectionReference;
+
+    // tearDown() é o método que executa após a execução de cada teste, usada para limpar ou desfazer qualquer mudança no ambiente de testes
+    
+    // Método que inicializa antes de cada execução de teste
+    setUp(() {
+      mockFirebaseFirestore = MockFirebaseFirestore();
       MockQuerySnapshot<Map<String, dynamic>> mockQuerySnapshot = MockQuerySnapshot();
-      MockCollectionReference<Map<String, dynamic>> mockCollectionReference = MockCollectionReference();
+      mockCollectionReference = MockCollectionReference();
       MockQueryDocumentSnapshot<Map<String, dynamic>> mockQueryDocumentSnapshot001 = MockQueryDocumentSnapshot();
       MockQueryDocumentSnapshot<Map<String, dynamic>> mockQueryDocumentSnapshot002 = MockQueryDocumentSnapshot();
 
-      String uid = "MEU_UID";
-
-      ListinService listinService = ListinService(
-        uid: uid,
-        firestore: mockFirebaseFirestore,);
+      uid = "MEU_UID";
 
       Listin listin001 = Listin(
           id: "ID001",
@@ -53,6 +56,28 @@ void main() {
       when(mockCollectionReference.get()).thenAnswer((_) async => mockQuerySnapshot);
 
       when(mockFirebaseFirestore.collection(uid)).thenReturn(mockCollectionReference);
+    });
+
+    test("O método deve retornar uma lista de listin.", () async {
+      ListinService listinService = ListinService(
+        firestore: mockFirebaseFirestore,
+        uid: uid,
+      );
+
+      List<Listin> result = await listinService.getListins();
+
+      expect(result.length, 2);
+    });
+
+    test("O método get deve ser chamado apenas uma vez.", () async {
+      ListinService listinService = ListinService(
+        firestore: mockFirebaseFirestore,
+        uid: uid,
+      );
+
+      await listinService.getListins();
+
+      verify(mockCollectionReference.get()).called(equals(1));
     });
   });
 
