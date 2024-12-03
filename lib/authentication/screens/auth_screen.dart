@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_listin/_core/constants/listin_keys.dart';
 
 import '../../_core/constants/listin_colors.dart';
 import '../../_core/components/listin_snackbars.dart';
@@ -71,6 +72,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     Visibility(
                       visible: !isLoginScreen,
                       child: TextFormField(
+                        key: const ValueKey(ListinKeys.authNameTextField),
                         controller: _nameController,
                         decoration: const InputDecoration(
                           label: Text("Nome"),
@@ -84,6 +86,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                     TextFormField(
+                      key: const ValueKey(ListinKeys.authEmailTextField),
                       controller: _emailController,
                       decoration: const InputDecoration(label: Text("E-mail")),
                       validator: (value) {
@@ -99,6 +102,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       },
                     ),
                     TextFormField(
+                      key: const ValueKey(ListinKeys.authPasswordTextField),
                       controller: _passwordController,
                       obscureText: true,
                       decoration: const InputDecoration(label: Text("Senha")),
@@ -122,6 +126,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     Visibility(
                         visible: !isLoginScreen,
                         child: TextFormField(
+                          key: const ValueKey(ListinKeys.authConfirmPasswordTextField),
                           controller: _passwordConfirmationController,
                           obscureText: true,
                           decoration: const InputDecoration(
@@ -140,6 +145,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         )),
                     const SizedBox(height: 16),
                     ElevatedButton(
+                      key: const ValueKey(ListinKeys.authMainButton),
                       onPressed: () {
                         onSendButtonClicked();
                       },
@@ -148,6 +154,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                     ),
                     TextButton(
+                      key: const ValueKey(ListinKeys.authChangeStateButton),
                       onPressed: () {
                         setState(() {
                           isLoginScreen = !isLoginScreen;

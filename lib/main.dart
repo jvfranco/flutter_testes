@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_listin/_core/components/listin_router.dart';
@@ -5,7 +8,7 @@ import 'package:flutter_listin/_core/constants/listin_theme.dart';
 
 import 'firebase_options.dart';
 
-void main() async {
+void main() async {  //
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
