@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_listin/_core/constants/listin_keys.dart';
 import 'package:flutter_listin/authentication/services/auth_service.dart';
 
 import '../../authentication/components/dialog_remove_account.dart';
@@ -33,6 +34,7 @@ class HomeDrawer extends StatelessWidget {
           //   onTap: () {},
           // ),
           ListTile(
+            key: const ValueKey(ListinKeys.homeRemoveUserButton),
             leading: const Icon(Icons.delete),
             title: const Text("Remover conta"),
             contentPadding: const EdgeInsets.only(left: 16),
@@ -45,6 +47,7 @@ class HomeDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            key: const ValueKey(ListinKeys.homeLogoutButton),
             leading: const Icon(Icons.logout),
             title: const Text("Sair"),
             contentPadding: const EdgeInsets.only(left: 16),
